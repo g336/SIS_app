@@ -3,13 +3,11 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-nativ
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../App';
 
-type ForgotPasswordScreenNavigationProp = NativeStackNavigationProp<
-  RootStackParamList,
-  'ForgotPassword'
->;
+type ForgotNavigationProp =
+  NativeStackNavigationProp<RootStackParamList, 'ForgotPassword'>;
 
 interface Props {
-  navigation: ForgotPasswordScreenNavigationProp;
+  navigation: ForgotNavigationProp;
 }
 
 const ForgotPasswordScreen: React.FC<Props> = ({ navigation }) => {
@@ -27,19 +25,13 @@ const ForgotPasswordScreen: React.FC<Props> = ({ navigation }) => {
           style={styles.input}
           value={phone}
           onChangeText={setPhone}
-        />
-
-        <TextInput
-          placeholder="Enter code that has been sent to you"
-          placeholderTextColor="#666"
-          style={styles.input}
-          value={code}
-          onChangeText={setCode}
+          keyboardType="phone-pad"
         />
 
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate('ResetPassword')}>
+          onPress={() => navigation.navigate('VerifyCode')}
+        >
           <Text style={styles.buttonText}>Reset password</Text>
         </TouchableOpacity>
       </View>
@@ -61,19 +53,19 @@ const styles = StyleSheet.create({
     padding: 25,
     borderRadius: 20,
     width: '80%',
-    alignItems: 'center',
   },
   title: {
     fontSize: 20,
     marginBottom: 20,
     color: '#243B55',
+    textAlign: 'center',
   },
   input: {
     backgroundColor: '#f2f2f2',
     borderRadius: 15,
     width: '100%',
     padding: 10,
-    marginBottom: 12,
+    marginBottom: 15,
   },
   button: {
     backgroundColor: '#337ac6',
@@ -81,6 +73,7 @@ const styles = StyleSheet.create({
     width: '100%',
     padding: 10,
     alignItems: 'center',
+    marginTop: 10,
   },
   buttonText: {
     color: 'white',

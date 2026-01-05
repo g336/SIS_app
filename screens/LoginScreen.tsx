@@ -3,7 +3,8 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-nativ
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../App';
 
-type LoginScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Login'>;
+type LoginScreenNavigationProp =
+  NativeStackNavigationProp<RootStackParamList, 'Login'>;
 
 interface Props {
   navigation: LoginScreenNavigationProp;
@@ -12,6 +13,25 @@ interface Props {
 const LoginScreen: React.FC<Props> = ({ navigation }) => {
   const [enroll, setEnroll] = useState('');
   const [password, setPassword] = useState('');
+
+  // Demo credentials
+  const demoUser = {
+    enrollment: 'akuma01',
+    password: 'mypassword',
+  };
+
+  const handleLogin = () => {
+    if (!enroll || !password) {
+      alert('Please fill all fields');
+      return;
+    }
+
+    if (enroll === demoUser.enrollment && password === demoUser.password) {
+      navigation.replace('StudentHome'); // ✅ Navigate to StudentHome
+    } else {
+      alert('Invalid enrollment number or password');
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -39,7 +59,10 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
           <Text style={styles.forgotText}>Forgot password?</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={handleLogin} // ✅ Call the login function
+        >
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
       </View>
@@ -61,12 +84,12 @@ const styles = StyleSheet.create({
     padding: 25,
     borderRadius: 20,
     width: '80%',
-    alignItems: 'center',
   },
   title: {
     fontSize: 22,
     marginBottom: 20,
     color: '#243B55',
+    textAlign: 'center',
   },
   input: {
     backgroundColor: '#f2f2f2',
@@ -93,3 +116,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 });
+function alert(arg0: string) {
+  throw new Error('Function not implemented.');
+}
+
