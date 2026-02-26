@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "801602505745",
+    "firebase_url": "https://student-sis-app-default-rtdb.firebaseio.com",
+    "project_id": "student-sis-app",
+    "storage_bucket": "student-sis-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:801602505745:android:063d7816b59944376635b0",
+        "android_client_info": {
+          "package_name": "com.sis_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDeaoVaOrJFwe_Ot1JZYljqPAvLHSQJ9BY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:801602505745:android:2850c774af081ced6635b0",
+        "android_client_info": {
+          "package_name": "com.student_sis"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDeaoVaOrJFwe_Ot1JZYljqPAvLHSQJ9BY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
