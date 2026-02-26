@@ -1,43 +1,47 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Dimensions,
+} from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import StudentHomeScreen from '../screens/Student_screen/Light-darkModeHomeScreen';
+import StudentHomeScreen from '../screens/Student_screen/Light-darkModeHomeScreen'; 
 import ResultScreen from '../screens/Student_screen/LightModeResult';
-import PYQScreen from '../screens/Student_screen/LightMode_PYQ';
-import ProfileScreen from '../screens/Student_screen/LightMode_Profile';
-
-import { RootStackParamList } from '../App';
-import { RouteProp } from '@react-navigation/native';
-
-type StudentTabsRouteProp = RouteProp<
-  RootStackParamList,
-  'StudentTabs'
->;
-
-type Props = {
-  route: StudentTabsRouteProp;
-};
 
 const Tab = createBottomTabNavigator();
 const { width } = Dimensions.get('window');
 
-/* ---------- Floating Tab Bar ---------- */
+/* ---------------- Floating Tab Bar ---------------- */
+
 function FloatingTabBar({ state, navigation }: any) {
   return (
     <View style={styles.wrapper}>
       <View style={styles.tabBar}>
         {state.routes.map((route: any, index: number) => {
-          const focused = state.index === index;
+          const isFocused = state.index === index;
 
           return (
             <TouchableOpacity
               key={route.key}
               style={styles.tabItem}
               onPress={() => navigation.navigate(route.name)}
+              activeOpacity={0.7}
             >
-              <View style={[styles.icon, focused && styles.iconActive]} />
-              <Text style={[styles.label, focused && styles.labelActive]}>
+              <View
+                style={[
+                  styles.icon,
+                  isFocused && styles.iconActive,
+                ]}
+              />
+              <Text
+                style={[
+                  styles.label,
+                  isFocused && styles.labelActive,
+                ]}
+              >
                 {route.name}
               </Text>
             </TouchableOpacity>
@@ -48,45 +52,30 @@ function FloatingTabBar({ state, navigation }: any) {
   );
 }
 
-/* ---------- Student Tabs ---------- */
-const StudentTabs: React.FC<Props> = ({ route }) => {
-  const { enrollment } = route.params; // ✅ SAFE
+/* ---------------- Tabs ---------------- */
 
+export default function StudentTabs() {
   return (
     <Tab.Navigator
-      screenOptions={{ headerShown: false }}
+      screenOptions={{
+        headerShown: false,
+      }}
       tabBar={(props) => <FloatingTabBar {...props} />}
     >
       <Tab.Screen
         name="Home"
         component={StudentHomeScreen}
-        initialParams={{ enrollment }}
       />
-
       <Tab.Screen
         name="Results"
         component={ResultScreen}
-        initialParams={{ enrollment }}
-      />
-
-      <Tab.Screen
-        name="PYQ"
-        component={PYQScreen}
-        initialParams={{ enrollment }}
-      />
-
-      <Tab.Screen
-        name="Profile"
-        component={ProfileScreen}
-        initialParams={{ enrollment }}
       />
     </Tab.Navigator>
   );
-};
+}
 
-export default StudentTabs;
+/* ---------------- Styles ---------------- */
 
-/* ---------- Styles ---------- */
 const styles = StyleSheet.create({
   wrapper: {
     position: 'absolute',
@@ -103,9 +92,14 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center',
     elevation: 15,
+    shadowColor: '#243B55',
+    shadowOffset: { width: 0, height: 10 },
+    shadowOpacity: 0.25,
+    shadowRadius: 15,
   },
   tabItem: {
     alignItems: 'center',
+    justifyContent: 'center',
   },
   icon: {
     width: 20,
