@@ -2,13 +2,9 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import StudentHomeScreen from '../screens/Student_screen/Light-darkModeHomeScreen';
-import ResultScreen from '../screens/Student_screen/LightModeResult';
-import PYQScreen from '../screens/Student_screen/LightMode_PYQ';
-import ProfileScreen from '../screens/Student_screen/LightMode_Profile';
-
 import { RootStackParamList } from '../App';
 import { RouteProp } from '@react-navigation/native';
+import StudentMasterClass from '../screens/Student_screen/StudentMaster';
 
 type StudentTabsRouteProp = RouteProp<
   RootStackParamList,
@@ -49,41 +45,11 @@ function FloatingTabBar({ state, navigation }: any) {
 }
 
 /* ---------- Student Tabs ---------- */
-const StudentTabs: React.FC<Props> = ({ route }) => {
-  const { enrollment } = route.params; // ✅ SAFE
-
-  return (
-    <Tab.Navigator
-      screenOptions={{ headerShown: false }}
-      tabBar={(props) => <FloatingTabBar {...props} />}
-    >
-      <Tab.Screen
-        name="Home"
-        component={StudentHomeScreen}
-        initialParams={{ enrollment }}
-      />
-
-      <Tab.Screen
-        name="Results"
-        component={ResultScreen}
-        initialParams={{ enrollment }}
-      />
-
-      <Tab.Screen
-        name="PYQ"
-        component={PYQScreen}
-        initialParams={{ enrollment }}
-      />
-
-      <Tab.Screen
-        name="Profile"
-        component={ProfileScreen}
-        initialParams={{ enrollment }}
-      />
-    </Tab.Navigator>
-  );
+const StudentTabs = ({ route }: { route: any }) => {
+  // This passes any login parameters (like enrollment or userId) 
+  // directly into your new Master Class component safely.
+  return <StudentMasterClass route={route} />;
 };
-
 export default StudentTabs;
 
 /* ---------- Styles ---------- */

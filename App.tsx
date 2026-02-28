@@ -9,7 +9,6 @@ export type RootStackParamList = {
   VerifyCode: { email: string };
   StudentTabs: { enrollment: string }; 
   FacultyTabs: { userId: string };
-  // FIX 1: Renamed this to match exactly what LoginScreen is passing
   AdminDashboard: { userId: string }; 
 };
 
